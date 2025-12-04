@@ -1,0 +1,93 @@
+{% load static %}
+<!DOCTYPE HTML>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="pragma" content="no-cache" />
+<meta http-equiv="cache-control" content="max-age=604800" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<title>PichStickers | La mejor plataforma de stickers para termos y vasos</title>
+
+<!-- Favicon -->
+<link href="{% static 'images/favicon.ico' %}" rel="shortcut icon" type="image/x-icon">
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
+
+<!-- Tailwind CSS desde CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Estilos personalizados -->
+<link href="{% static 'css/ui.css' %}" rel="stylesheet" type="text/css"/>
+<link href="{% static 'css/responsive.css' %}" rel="stylesheet" media="only screen and (max-width: 1200px)" />
+
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+    }
+    
+    /* Bordes estilo cómic */
+    .comic-border {
+        border: 4px solid #000;
+        box-shadow: 8px 8px 0 #000;
+    }
+    
+    /* Tarjetas estilo cómic */
+    .comic-card {
+        border: 3px solid #000;
+        box-shadow: 6px 6px 0 rgba(0,0,0,0.2);
+        transition: all 0.3s ease;
+    }
+    
+    .comic-card:hover {
+        transform: translate(-4px, -4px);
+        box-shadow: 10px 10px 0 rgba(0,0,0,0.3);
+    }
+    
+    /* Texto con sombra explosiva */
+    .explosion-text {
+        text-shadow: 3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
+    }
+    
+    /* Rayas diagonales */
+    .diagonal-stripes {
+        background: repeating-linear-gradient(
+            45deg,
+            #fbbf24,
+            #fbbf24 10px,
+            #f59e0b 10px,
+            #f59e0b 20px
+        );
+    }
+    
+    /* Botones estilo cómic */
+    .btn-comic {
+        border: 3px solid #000;
+        box-shadow: 4px 4px 0 #000;
+        transition: all 0.2s ease;
+    }
+    
+    .btn-comic:hover {
+        transform: translate(2px, 2px);
+        box-shadow: 2px 2px 0 #000;
+    }
+    
+    /* Forma de estrella */
+    .starburst {
+        clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    }
+</style>
+
+<script type="text/javascript">
+// JavaScript personalizado puede ir aquí
+</script>
+
+</head>
+<body class="bg-yellow-50">
+    {% include 'includes/navbar.html' %}
+        {% block content %}
+
+        {% endblock %}
+    {% include 'includes/footer.html' %}
+    
