@@ -78,134 +78,23 @@
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            
-            <!-- Producto 1: Pack Espacial -->
+            <!-- Productos -->
+            {% for product in products %}
             <div class="comic-card bg-white overflow-hidden">
-                <div class="bg-gradient-to-br from-red-400 to-pink-500 h-56 flex items-center justify-center">
-                    <span class="text-8xl">🚀</span>
+                <div class="bg-gradient-to-br {{ product.color_class }} h-56 flex items-center justify-center">
+                    <img src="{{ product.images.url }}" alt="Producto" class="w-48 h-48 object-contain">
                 </div>
                 <div class="p-5">
-                    <span class="inline-block bg-red-500 text-white text-xs font-bold px-3 py-1 mb-2">NUEVO</span>
-                    <h3 class="text-xl font-black mb-2">PACK ESPACIAL</h3>
-                    <p class="text-gray-600 text-sm mb-4">15 stickers temáticos</p>
+                    <span class="inline-block bg-gradient-to-br {{ product.color_class }} text-white text-xs font-bold px-3 py-1 mb-2">{{ product.product_code}}</span>
+                    <h3 class="text-xl font-black mb-2">{{ product.product_name }}</h3>
+                    <p class="text-gray-600 text-sm mb-4">{{ product.description }}</p>
                     <div class="flex justify-between items-center">
-                        <span class="text-3xl font-black text-red-500">$1.500</span>
+                        <span class="text-3xl font-black text-red-500">$ {{ product.price }}</span>
                         <button class="bg-black text-yellow-400 px-4 py-2 font-bold btn-comic text-sm add-to-cart">AGREGAR</button>
                     </div>
                 </div>
             </div>
-
-            <!-- Producto 2: Pack Gamer -->
-            <div class="comic-card bg-white overflow-hidden">
-                <div class="bg-gradient-to-br from-blue-400 to-purple-500 h-56 flex items-center justify-center">
-                    <span class="text-8xl">🎮</span>
-                </div>
-                <div class="p-5">
-                    <span class="inline-block bg-blue-500 text-white text-xs font-bold px-3 py-1 mb-2">HOT</span>
-                    <h3 class="text-xl font-black mb-2">PACK GAMER</h3>
-                    <p class="text-gray-600 text-sm mb-4">20 stickers retro</p>
-                    <div class="flex justify-between items-center">
-                        <span class="text-3xl font-black text-blue-500">$1.800</span>
-                        <button class="bg-black text-yellow-400 px-4 py-2 font-bold btn-comic text-sm add-to-cart">AGREGAR</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Producto 3: Pack Natura -->
-            <div class="comic-card bg-white overflow-hidden">
-                <div class="bg-gradient-to-br from-green-400 to-emerald-500 h-56 flex items-center justify-center">
-                    <span class="text-8xl">🌿</span>
-                </div>
-                <div class="p-5">
-                    <span class="inline-block bg-green-500 text-white text-xs font-bold px-3 py-1 mb-2">ECO</span>
-                    <h3 class="text-xl font-black mb-2">PACK NATURA</h3>
-                    <p class="text-gray-600 text-sm mb-4">12 stickers plantas</p>
-                    <div class="flex justify-between items-center">
-                        <span class="text-3xl font-black text-green-500">$1.200</span>
-                        <button class="bg-black text-yellow-400 px-4 py-2 font-bold btn-comic text-sm add-to-cart">AGREGAR</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Producto 4: Pack Energy -->
-            <div class="comic-card bg-white overflow-hidden">
-                <div class="bg-gradient-to-br from-yellow-400 to-orange-500 h-56 flex items-center justify-center">
-                    <span class="text-8xl">⚡</span>
-                </div>
-                <div class="p-5">
-                    <span class="inline-block bg-yellow-500 text-black text-xs font-bold px-3 py-1 mb-2">POPULAR</span>
-                    <h3 class="text-xl font-black mb-2">PACK ENERGY</h3>
-                    <p class="text-gray-600 text-sm mb-4">18 stickers power</p>
-                    <div class="flex justify-between items-center">
-                        <span class="text-3xl font-black text-orange-500">$1.600</span>
-                        <button class="bg-black text-yellow-400 px-4 py-2 font-bold btn-comic text-sm add-to-cart">AGREGAR</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Producto 5: Pack Kawaii -->
-            <div class="comic-card bg-white overflow-hidden">
-                <div class="bg-gradient-to-br from-pink-400 to-rose-500 h-56 flex items-center justify-center">
-                    <span class="text-8xl">💖</span>
-                </div>
-                <div class="p-5">
-                    <span class="inline-block bg-pink-500 text-white text-xs font-bold px-3 py-1 mb-2">CUTE</span>
-                    <h3 class="text-xl font-black mb-2">PACK KAWAII</h3>
-                    <p class="text-gray-600 text-sm mb-4">25 stickers adorables</p>
-                    <div class="flex justify-between items-center">
-                        <span class="text-3xl font-black text-pink-500">$2.000</span>
-                        <button class="bg-black text-yellow-400 px-4 py-2 font-bold btn-comic text-sm add-to-cart">AGREGAR</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Producto 6: Pack Ocean -->
-            <div class="comic-card bg-white overflow-hidden">
-                <div class="bg-gradient-to-br from-indigo-400 to-blue-500 h-56 flex items-center justify-center">
-                    <span class="text-8xl">🌊</span>
-                </div>
-                <div class="p-5">
-                    <span class="inline-block bg-indigo-500 text-white text-xs font-bold px-3 py-1 mb-2">CHILL</span>
-                    <h3 class="text-xl font-black mb-2">PACK OCEAN</h3>
-                    <p class="text-gray-600 text-sm mb-4">14 stickers marinos</p>
-                    <div class="flex justify-between items-center">
-                        <span class="text-3xl font-black text-indigo-500">$1.400</span>
-                        <button class="bg-black text-yellow-400 px-4 py-2 font-bold btn-comic text-sm add-to-cart">AGREGAR</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Producto 7: Pack Fantasy -->
-            <div class="comic-card bg-white overflow-hidden">
-                <div class="bg-gradient-to-br from-purple-400 to-fuchsia-500 h-56 flex items-center justify-center">
-                    <span class="text-8xl">🦄</span>
-                </div>
-                <div class="p-5">
-                    <span class="inline-block bg-purple-500 text-white text-xs font-bold px-3 py-1 mb-2">MAGIC</span>
-                    <h3 class="text-xl font-black mb-2">PACK FANTASY</h3>
-                    <p class="text-gray-600 text-sm mb-4">16 stickers mágicos</p>
-                    <div class="flex justify-between items-center">
-                        <span class="text-3xl font-black text-purple-500">$1.700</span>
-                        <button class="bg-black text-yellow-400 px-4 py-2 font-bold btn-comic text-sm add-to-cart">AGREGAR</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Producto 8: Pack Extreme -->
-            <div class="comic-card bg-white overflow-hidden">
-                <div class="bg-gradient-to-br from-red-400 to-yellow-500 h-56 flex items-center justify-center">
-                    <span class="text-8xl">🔥</span>
-                </div>
-                <div class="p-5">
-                    <span class="inline-block bg-red-500 text-white text-xs font-bold px-3 py-1 mb-2">FIRE</span>
-                    <h3 class="text-xl font-black mb-2">PACK EXTREME</h3>
-                    <p class="text-gray-600 text-sm mb-4">22 stickers intensos</p>
-                    <div class="flex justify-between items-center">
-                        <span class="text-3xl font-black text-red-500">$1.900</span>
-                        <button class="bg-black text-yellow-400 px-4 py-2 font-bold btn-comic text-sm add-to-cart">AGREGAR</button>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
 
         </div>
 

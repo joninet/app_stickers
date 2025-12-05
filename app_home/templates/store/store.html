@@ -1,0 +1,228 @@
+{% extends 'base.html' %} {% block content %}
+
+<section class="py-8">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+      <!-- ========================= SIDEBAR FILTROS ========================= -->
+      <aside class="lg:col-span-1">
+        <!-- Filtro Categorías -->
+        <div class="filter-section p-5 mb-6">
+          <h3
+            class="text-xl font-black mb-4 flex items-center justify-between cursor-pointer"
+          >
+            CATEGORÍAS
+            <span class="text-2xl">▼</span>
+          </h3>
+          <ul class="space-y-3">
+            <li
+              class="flex items-center gap-3 cursor-pointer hover:text-red-500 font-semibold"
+            >
+              <input type="checkbox" class="custom-checkbox" id="cat1" />
+              <label for="cat1" class="cursor-pointer">Accesorios</label>
+            </li>
+            <li
+              class="flex items-center gap-3 cursor-pointer hover:text-red-500 font-semibold"
+            >
+              <input type="checkbox" class="custom-checkbox" id="cat2" />
+              <label for="cat2" class="cursor-pointer">Teléfonos</label>
+            </li>
+            <li
+              class="flex items-center gap-3 cursor-pointer hover:text-red-500 font-semibold"
+            >
+              <input type="checkbox" class="custom-checkbox" id="cat3" />
+              <label for="cat3" class="cursor-pointer">Pantalones</label>
+            </li>
+            <li
+              class="flex items-center gap-3 cursor-pointer hover:text-red-500 font-semibold"
+            >
+              <input type="checkbox" class="custom-checkbox" id="cat4" />
+              <label for="cat4" class="cursor-pointer">Computadoras</label>
+            </li>
+            <li
+              class="flex items-center gap-3 cursor-pointer hover:text-red-500 font-semibold"
+            >
+              <input type="checkbox" class="custom-checkbox" id="cat5" />
+              <label for="cat5" class="cursor-pointer">Camisetas</label>
+            </li>
+            <li
+              class="flex items-center gap-3 cursor-pointer hover:text-red-500 font-semibold"
+            >
+              <input type="checkbox" class="custom-checkbox" id="cat6" />
+              <label for="cat6" class="cursor-pointer">Adornos</label>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Filtro Tamaños -->
+        <div class="filter-section p-5 mb-6">
+          <h3
+            class="text-xl font-black mb-4 flex items-center justify-between cursor-pointer"
+          >
+            TAMAÑOS
+            <span class="text-2xl">▼</span>
+          </h3>
+          <div class="grid grid-cols-2 gap-3">
+            <button
+              class="bg-white border-3 border-black px-4 py-2 font-black hover:bg-red-500 hover:text-white transition"
+            >
+              XS
+            </button>
+            <button
+              class="bg-white border-3 border-black px-4 py-2 font-black hover:bg-red-500 hover:text-white transition"
+            >
+              SM
+            </button>
+            <button
+              class="bg-white border-3 border-black px-4 py-2 font-black hover:bg-red-500 hover:text-white transition"
+            >
+              LG
+            </button>
+            <button
+              class="bg-white border-3 border-black px-4 py-2 font-black hover:bg-red-500 hover:text-white transition"
+            >
+              XXL
+            </button>
+          </div>
+        </div>
+
+        <!-- Filtro Precios -->
+        <div class="filter-section p-5">
+          <h3
+            class="text-xl font-black mb-4 flex items-center justify-between cursor-pointer"
+          >
+            PRECIOS
+            <span class="text-2xl">▼</span>
+          </h3>
+          <div class="space-y-3">
+            <div class="flex items-center gap-3">
+              <input
+                type="number"
+                placeholder="Mín"
+                class="w-full border-3 border-black px-3 py-2 font-bold"
+              />
+            </div>
+            <div class="flex items-center gap-3">
+              <input
+                type="number"
+                placeholder="Máx"
+                class="w-full border-3 border-black px-3 py-2 font-bold"
+              />
+            </div>
+            <button
+              class="w-full bg-red-500 text-white px-4 py-2 font-black btn-comic hover:bg-red-600"
+            >
+              APLICAR
+            </button>
+          </div>
+        </div>
+      </aside>
+      <!-- ========================= FIN SIDEBAR ========================= -->
+
+      <!-- ========================= GRID DE PRODUCTOS ========================= -->
+      <div class="lg:col-span-3">
+        <!-- Header con contador y ordenamiento -->
+        <div
+          class="flex items-center justify-between mb-6 p-4 bg-white comic-border"
+        >
+          <h2 class="text-2xl font-black">
+            {{ products|length }} Productos Encontrados
+          </h2>
+          <div class="flex items-center gap-3">
+            <span class="font-bold">Ordenar por:</span>
+            <select
+              class="border-3 border-black px-4 py-2 font-bold cursor-pointer"
+            >
+              <option>Más recientes</option>
+              <option>Precio: Menor a Mayor</option>
+              <option>Precio: Mayor a Menor</option>
+              <option>Más populares</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Grid de productos -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+          {% for product in products %}
+          <div class="comic-card bg-white overflow-hidden">
+            <div class="relative">
+              <div
+                class="bg-gradient-to-br from-red-400 to-yellow-500 h-56 flex items-center justify-center overflow-hidden"
+              >
+                {% if product.images %}
+                <img
+                  src="{{ product.images.url }}"
+                  alt="{{ product.product_name }}"
+                  class="w-48 h-48 object-contain"
+                />
+                {% else %}
+                <span class="text-7xl">📦</span>
+                {% endif %}
+              </div>
+              <span
+                class="absolute top-2 left-2 bg-red-500 text-white text-xs font-black px-3 py-1"
+              >
+                {{ product.product_code }}
+              </span>
+            </div>
+            <div class="p-5">
+              <h3 class="text-xl font-black mb-2">
+                {{ product.product_name }}
+              </h3>
+              <p class="text-gray-600 text-sm mb-4 line-clamp-2">
+                {{ product.description }}
+              </p>
+              <div class="flex justify-between items-center">
+                <span class="text-3xl font-black text-red-500"
+                  >${{ product.price }}</span
+                >
+                <button
+                  class="bg-black text-yellow-400 px-4 py-2 font-bold btn-comic text-sm add-to-cart"
+                >
+                  AGREGAR
+                </button>
+              </div>
+            </div>
+          </div>
+          {% empty %}
+          <div class="col-span-3 text-center py-12">
+            <p class="text-2xl font-black text-gray-400">
+              No hay productos disponibles
+            </p>
+          </div>
+          {% endfor %}
+        </div>
+        <!-- FIN Grid de productos -->
+
+        <!-- Paginación -->
+        <div class="flex justify-center items-center gap-2">
+          <button
+            class="bg-white text-black px-4 py-2 font-black btn-comic hover:bg-gray-200"
+          >
+            Anterior
+          </button>
+          <button class="bg-red-500 text-white px-4 py-2 font-black btn-comic">
+            1
+          </button>
+          <button
+            class="bg-white text-black px-4 py-2 font-black btn-comic hover:bg-red-500 hover:text-white"
+          >
+            2
+          </button>
+          <button
+            class="bg-white text-black px-4 py-2 font-black btn-comic hover:bg-red-500 hover:text-white"
+          >
+            3
+          </button>
+          <button
+            class="bg-white text-black px-4 py-2 font-black btn-comic hover:bg-gray-200"
+          >
+            Siguiente
+          </button>
+        </div>
+      </div>
+      <!-- ========================= FIN GRID PRODUCTOS ========================= -->
+    </div>
+  </div>
+</section>
+
+{% endblock %}
