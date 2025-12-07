@@ -1,7 +1,7 @@
 from django.db import models
 
-from category.models import SubCategory
-# Create your models here.
+from category.models import SubCategory, Category
+from django.urls import reverse
 
 class Product(models.Model):
     product_code = models.CharField(max_length=10, unique=True, blank=True)
@@ -49,9 +49,10 @@ class Product(models.Model):
             self.product_code = generated_code
 
         super().save(*args, **kwargs)
+    
+    def get_url(self):
+        return reverse('product_detail', args=[self.subcategory.category.slug, self.subcategory.slug, self.slug])
 
     def __str__(self):
         return self.product_name
-
-    
     

@@ -1,0 +1,173 @@
+{% extends 'base.html' %} {% block content %}
+
+<body class="bg-yellow-50">
+  <section class="py-8">
+    <div class="max-w-7xl mx-auto px-6">
+      <!-- Breadcrumb -->
+      <div class="mb-6 flex items-center gap-2 text-sm font-bold">
+        <a href="#" class="hover:text-red-500">Inicio</a>
+        <span>›</span>
+        <a href="#" class="hover:text-red-500">Stickers</a>
+        <span>›</span>
+        <a href="#" class="hover:text-red-500">Anime</a>
+        <span>›</span>
+        <span class="text-red-500">Sticker Pikachu</span>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+        <!-- ========================= GALERÍA DE IMÁGENES ========================= -->
+        <div>
+          <!-- Imagen principal -->
+          <div class="comic-border bg-white p-4 mb-4">
+            <div
+              class="bg-gradient-to-br from-red-400 to-yellow-500 h-96 flex items-center justify-center rounded overflow-hidden"
+            >
+              <img
+                src="{{ single_product.images.url }}"
+                alt="Producto"
+                class="w-80 h-80 object-contain"
+              />
+            </div>
+          </div>
+
+          <!-- Thumbnails -->
+        </div>
+
+        <!-- ========================= INFORMACIÓN DEL PRODUCTO ========================= -->
+        <div>
+          <div class="comic-card bg-white p-8">
+            <!-- Nombre del producto -->
+            <h1 class="text-4xl font-black mb-4">
+              {{ single_product.product_name }}
+            </h1>
+
+            <!-- Precio -->
+            <div class="mb-6">
+              <span class="text-5xl font-black text-red-500"
+                >${{ single_product.price }}</span
+              >
+            </div>
+
+            <!-- Descripción -->
+            <div class="mb-6">
+              <p class="text-gray-700 font-bold leading-relaxed">
+                {{ single_product.description}}
+              </p>
+            </div>
+
+            <hr class="border-2 border-gray-300 mb-6" />
+
+            <!-- Botón Agregar al carrito -->
+            {% if single_product.stock <= 0 %}
+            <button
+              class="w-full bg-green-600 text-white px-6 py-4 font-black text-lg btn-comic hover:bg-green-700 flex items-center justify-center gap-3"
+            >
+              <span>🛒</span>
+              Sin Stock
+            </button>
+            {% else %}
+            <button
+              class="w-full bg-indigo-600 text-white px-6 py-4 font-black text-lg btn-comic hover:bg-indigo-700 flex items-center justify-center gap-3"
+            >
+              <span>🛒</span>
+              Agregar al carrito
+            </button>
+            {%endif%}
+          </div>
+        </div>
+      </div>
+
+      <!-- ========================= CUSTOMER REVIEWS ========================= -->
+      <div class="mb-12">
+        <h2 class="text-3xl font-black mb-6">Customer Reviews</h2>
+
+        <!-- Review Item -->
+        <div class="comic-card bg-white p-6 mb-4">
+          <div class="flex items-start gap-4">
+            <div
+              class="w-16 h-16 bg-gray-300 border-3 border-black flex items-center justify-center flex-shrink-0"
+            >
+              <span class="text-2xl">👤</span>
+            </div>
+            <div class="flex-1">
+              <div class="flex items-center justify-between mb-2">
+                <h3 class="text-xl font-black">Mike John</h3>
+                <span class="text-gray-500 font-bold">24.04.2020</span>
+              </div>
+              <div class="flex gap-1 mb-3">
+                <span class="text-yellow-400 text-xl">★</span>
+                <span class="text-yellow-400 text-xl">★</span>
+                <span class="text-yellow-400 text-xl">★</span>
+                <span class="text-yellow-400 text-xl">★</span>
+                <span class="text-yellow-400 text-xl">★</span>
+              </div>
+              <p class="text-gray-700 font-bold leading-relaxed">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review Item 2 -->
+        <div class="comic-card bg-white p-6 mb-4">
+          <div class="flex items-start gap-4">
+            <div
+              class="w-16 h-16 bg-gray-300 border-3 border-black flex items-center justify-center flex-shrink-0"
+            >
+              <span class="text-2xl">👤</span>
+            </div>
+            <div class="flex-1">
+              <div class="flex items-center justify-between mb-2">
+                <h3 class="text-xl font-black">Sarah Smith</h3>
+                <span class="text-gray-500 font-bold">15.03.2020</span>
+              </div>
+              <div class="flex gap-1 mb-3">
+                <span class="text-yellow-400 text-xl">★</span>
+                <span class="text-yellow-400 text-xl">★</span>
+                <span class="text-yellow-400 text-xl">★</span>
+                <span class="text-yellow-400 text-xl">★</span>
+                <span class="text-gray-300 text-xl">★</span>
+              </div>
+              <p class="text-gray-700 font-bold leading-relaxed">
+                Great product! The quality is amazing and it arrived quickly.
+                Would definitely recommend to anyone looking for something like
+                this.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review Item 3 -->
+        <div class="comic-card bg-white p-6">
+          <div class="flex items-start gap-4">
+            <div
+              class="w-16 h-16 bg-gray-300 border-3 border-black flex items-center justify-center flex-shrink-0"
+            >
+              <span class="text-2xl">👤</span>
+            </div>
+            <div class="flex-1">
+              <div class="flex items-center justify-between mb-2">
+                <h3 class="text-xl font-black">Alex Johnson</h3>
+                <span class="text-gray-500 font-bold">02.02.2020</span>
+              </div>
+              <div class="flex gap-1 mb-3">
+                <span class="text-yellow-400 text-xl">★</span>
+                <span class="text-yellow-400 text-xl">★</span>
+                <span class="text-yellow-400 text-xl">★</span>
+                <span class="text-yellow-400 text-xl">★</span>
+                <span class="text-yellow-400 text-xl">★</span>
+              </div>
+              <p class="text-gray-700 font-bold leading-relaxed">
+                Perfect! Exactly what I was looking for. The attention to detail
+                is impressive and the customer service was excellent.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+{% endblock %}

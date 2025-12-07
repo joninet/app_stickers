@@ -1,44 +1,78 @@
 {% load static %}
 <header class="section-header">
+  <!-- TOP BAR -->
+  <nav class="bg-white comic-border relative z-50">
+    <div class="max-w-7xl mx-auto px-6 py-4">
+      <div class="flex justify-between items-center">
+        <!-- Logo -->
+        <a
+          href="{% url 'home' %}"
+          class="flex items-center gap-4 hover:opacity-90 transition"
+        >
+          <img
+            src="{% static 'images/logo2.png' %}"
+            alt="Logo"
+            class="w-24 h-24 object-contain"
+          />
+          <div>
+            <h1 class="text-3xl font-black tracking-tighter">PICHISTICKERS</h1>
+            <p class="text-xs text-gray-600 font-semibold">¡PEGÁ LA ONDA!</p>
+          </div>
+        </a>
 
-        <!-- TOP BAR -->
-        <nav class="bg-white comic-border relative z-50">
-            <div class="max-w-7xl mx-auto px-6 py-4">
-                <div class="flex justify-between items-center">
-                    
-                    <!-- Logo -->
-                    <div class="flex items-center gap-4">
-                        <div class="w-16 h-16 bg-red-500 rounded-full flex items-center justify-center starburst">
-                            <span class="text-white text-2xl font-black">P!</span>
-                        </div>
-                        <div>
-                            <h1 class="text-3xl font-black tracking-tighter">PICHSTICKERS</h1>
-                            <p class="text-xs text-gray-600 font-semibold">¡PEGÁ LA ONDA!</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Menú de navegación -->
-                    <div class="hidden md:flex gap-6 items-center">
-                        <a href="#" class="font-bold text-gray-800 hover:text-red-500 transition">INICIO</a>
-                        <a href="#productos" class="font-bold text-gray-800 hover:text-red-500 transition">PRODUCTOS</a>
-                        <a href="#custom" class="font-bold text-gray-800 hover:text-red-500 transition">CUSTOM</a>
-                        <a href="#contacto" class="font-bold text-gray-800 hover:text-red-500 transition">CONTACTO</a>
-                        
-                        <!-- Carrito -->
-                        <button class="bg-black text-yellow-400 px-6 py-2 font-black btn-comic relative">
-                            CARRITO
-                            <span id="cart-count" class="absolute -top-2 -right-2 bg-red-500 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs">0</span>
-                        </button>
-                    </div>
-                    
-                    <!-- Botón menú móvil -->
-                    <button class="md:hidden bg-black text-white p-2 btn-comic">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-        </nav>
+        <!-- Menú de navegación -->
+        <div class="hidden md:flex gap-6 items-center">
+          <a
+            href="#"
+            class="font-bold text-gray-800 hover:text-red-500 transition"
+            >INICIO</a
+          >
+          <a
+            href="#productos"
+            class="font-bold text-gray-800 hover:text-red-500 transition"
+            >PRODUCTOS</a
+          >
+          <a
+            href="#custom"
+            class="font-bold text-gray-800 hover:text-red-500 transition"
+            >CUSTOM</a
+          >
+          <a
+            href="#contacto"
+            class="font-bold text-gray-800 hover:text-red-500 transition"
+            >CONTACTO</a
+          >
 
-    </header>
+          <!-- Carrito -->
+          <button
+            class="bg-black text-yellow-400 px-6 py-2 font-black btn-comic relative"
+          >
+            CARRITO
+            <span
+              id="cart-count"
+              class="absolute -top-2 -right-2 bg-red-500 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs"
+              >0</span
+            >
+          </button>
+        </div>
+
+        <!-- Botón menú móvil -->
+        <button class="md:hidden bg-black text-white p-2 btn-comic">
+          <svg
+            class="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            ></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+</header>

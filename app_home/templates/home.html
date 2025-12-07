@@ -35,32 +35,23 @@
 <!-- ========================= CATEGORÍAS ========================= -->
 <section class="py-16 bg-white">
     <div class="max-w-7xl mx-auto px-6">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-            
-            <!-- Categoría 1: Packs -->
-            <div class="comic-card bg-red-500 p-6 text-center cursor-pointer">
-                <div class="text-5xl mb-3">🎨</div>
-                <h3 class="font-black text-white text-xl">PACKS</h3>
-            </div>
-            
-            <!-- Categoría 2: Premium -->
-            <div class="comic-card bg-blue-500 p-6 text-center cursor-pointer">
-                <div class="text-5xl mb-3">⭐</div>
-                <h3 class="font-black text-white text-xl">PREMIUM</h3>
-            </div>
-            
-            <!-- Categoría 3: Nuevos -->
-            <div class="comic-card bg-yellow-400 p-6 text-center cursor-pointer">
-                <div class="text-5xl mb-3">🔥</div>
-                <h3 class="font-black text-black text-xl">NUEVOS</h3>
-            </div>
-            
-            <!-- Categoría 4: Custom -->
-            <div class="comic-card bg-green-500 p-6 text-center cursor-pointer">
-                <div class="text-5xl mb-3">✨</div>
-                <h3 class="font-black text-white text-xl">CUSTOM</h3>
-            </div>
-            
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 justify-center">
+            {% for category in links %}
+            <a href="{% url 'store' %}" class="comic-card {% cycle 'bg-red-500' 'bg-blue-500' 'bg-yellow-400' 'bg-green-500' %} p-6 text-center cursor-pointer block hover:opacity-90 transition">
+                <div class="mb-3 flex justify-center">
+                {% if category.cat_image %}
+                <img
+                  src="{{ category.cat_image.url }}"
+                  alt="{{ category.category_name }}"
+                  class="w-24 h-24 object-contain"
+                />
+                {% else %}
+                <span class="text-5xl">📦</span>
+                {% endif %}
+                </div>
+                <h3 class="font-black text-white text-xl">{{category.category_name}}</h3>
+            </a>
+            {% endfor %}
         </div>
     </div>
 </section>
@@ -80,7 +71,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             <!-- Productos -->
             {% for product in products %}
-            <div class="comic-card bg-white overflow-hidden">
+            <a href="{{product.get_url}}" class="comic-card bg-white overflow-hidden block hover:opacity-90 transition">
                 <div class="bg-gradient-to-br {{ product.color_class }} h-56 flex items-center justify-center">
                     <img src="{{ product.images.url }}" alt="Producto" class="w-48 h-48 object-contain">
                 </div>
@@ -93,7 +84,7 @@
                         <button class="bg-black text-yellow-400 px-4 py-2 font-bold btn-comic text-sm add-to-cart">AGREGAR</button>
                     </div>
                 </div>
-            </div>
+            </a>
             {% endfor %}
 
         </div>

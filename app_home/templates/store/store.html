@@ -14,42 +14,47 @@
             <span class="text-2xl">▼</span>
           </h3>
           <ul class="space-y-3">
+            <!-- Opción para ver todos -->
             <li
               class="flex items-center gap-3 cursor-pointer hover:text-red-500 font-semibold"
             >
-              <input type="checkbox" class="custom-checkbox" id="cat1" />
-              <label for="cat1" class="cursor-pointer">Accesorios</label>
+              <a
+                href="{% url 'store' %}"
+                class="{% if not current_category and not current_subcategory %}text-red-500{% endif %}"
+              >
+                Todos los productos
+              </a>
             </li>
-            <li
-              class="flex items-center gap-3 cursor-pointer hover:text-red-500 font-semibold"
-            >
-              <input type="checkbox" class="custom-checkbox" id="cat2" />
-              <label for="cat2" class="cursor-pointer">Teléfonos</label>
+
+            {% for category in categories %}
+            <li class="mb-4">
+              <!-- Nombre de la categoría -->
+              <a
+                href="{% url 'products_by_category' category.slug %}"
+                class="flex items-center gap-3 cursor-pointer hover:text-red-500 font-semibold {% if current_category.id == category.id %}text-red-500{% endif %}"
+              >
+                {{ category.category_name }}
+              </a>
+
+              <!-- Subcategorías (si existen) -->
+              {% if category.subcategories.all %}
+              <ul class="ml-6 mt-2 space-y-2">
+                {% for subcategory in category.subcategories.all %}
+                <li
+                  class="flex items-center gap-2 cursor-pointer hover:text-red-500 text-sm font-semibold"
+                >
+                  <a
+                    href="{% url 'products_by_subcategory' category.slug subcategory.slug %}"
+                    class="{% if current_subcategory.id == subcategory.id %}text-red-500{% endif %}"
+                  >
+                    - {{ subcategory.subcategory_name }}
+                  </a>
+                </li>
+                {% endfor %}
+              </ul>
+              {% endif %}
             </li>
-            <li
-              class="flex items-center gap-3 cursor-pointer hover:text-red-500 font-semibold"
-            >
-              <input type="checkbox" class="custom-checkbox" id="cat3" />
-              <label for="cat3" class="cursor-pointer">Pantalones</label>
-            </li>
-            <li
-              class="flex items-center gap-3 cursor-pointer hover:text-red-500 font-semibold"
-            >
-              <input type="checkbox" class="custom-checkbox" id="cat4" />
-              <label for="cat4" class="cursor-pointer">Computadoras</label>
-            </li>
-            <li
-              class="flex items-center gap-3 cursor-pointer hover:text-red-500 font-semibold"
-            >
-              <input type="checkbox" class="custom-checkbox" id="cat5" />
-              <label for="cat5" class="cursor-pointer">Camisetas</label>
-            </li>
-            <li
-              class="flex items-center gap-3 cursor-pointer hover:text-red-500 font-semibold"
-            >
-              <input type="checkbox" class="custom-checkbox" id="cat6" />
-              <label for="cat6" class="cursor-pointer">Adornos</label>
-            </li>
+            {% endfor %}
           </ul>
         </div>
 
@@ -124,9 +129,18 @@
         <div
           class="flex items-center justify-between mb-6 p-4 bg-white comic-border"
         >
-          <h2 class="text-2xl font-black">
-            {{ products|length }} Productos Encontrados
-          </h2>
+          <div>
+            <h2 class="text-2xl font-black">
+              {{ product_count }} Productos Encontrados
+            </h2>
+            {% if current_subcategory %}
+            <p class="text-sm text-gray-600 mt-1"></p>
+            {% elif current_category %}
+            <p class="text-sm text-gray-600 mt-1">
+              En {{ current_category.category_name }}
+            </p>
+            {% endif %}
+          </div>
           <div class="flex items-center gap-3">
             <span class="font-bold">Ordenar por:</span>
             <select
