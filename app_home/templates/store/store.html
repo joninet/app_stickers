@@ -157,37 +157,33 @@
         <!-- Grid de productos -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
           {% for product in products %}
-          <div class="comic-card bg-white overflow-hidden">
-            <div class="relative">
-              <div
-                class="bg-gradient-to-br from-red-400 to-yellow-500 h-56 flex items-center justify-center overflow-hidden"
-              >
-                {% if product.images %}
-                <img
-                  src="{{ product.images.url }}"
-                  alt="{{ product.product_name }}"
-                  class="w-48 h-48 object-contain"
-                />
-                {% else %}
-                <span class="text-7xl">📦</span>
-                {% endif %}
-              </div>
-              <span
-                class="absolute top-2 left-2 bg-red-500 text-white text-xs font-black px-3 py-1"
-              >
-                {{ product.product_code }}
-              </span>
+          <a
+            href="{{product.get_url}}"
+            class="comic-card bg-white overflow-hidden block hover:opacity-90 transition"
+          >
+            <div
+              class="bg-gradient-to-br {% cycle 'bg-red-500' 'bg-blue-500' 'bg-yellow-400' 'bg-green-500' %} h-56 flex items-center justify-center"
+            >
+              <img
+                src="{{ product.images.url }}"
+                alt="Producto"
+                class="w-48 h-48 object-contain"
+              />
             </div>
             <div class="p-5">
+              <span
+                class="inline-block bg-gradient-to-br {% cycle 'bg-red-500' 'bg-blue-500' 'bg-yellow-400' 'bg-green-500' %} text-white text-xs font-bold px-3 py-1 mb-2"
+                >{{ product.product_code}}</span
+              >
               <h3 class="text-xl font-black mb-2">
                 {{ product.product_name }}
               </h3>
-              <p class="text-gray-600 text-sm mb-4 line-clamp-2">
+              <p class="text-gray-600 text-sm mb-4">
                 {{ product.description }}
               </p>
               <div class="flex justify-between items-center">
                 <span class="text-3xl font-black text-red-500"
-                  >${{ product.price }}</span
+                  >$ {{ product.price }}</span
                 >
                 <button
                   class="bg-black text-yellow-400 px-4 py-2 font-bold btn-comic text-sm add-to-cart"
@@ -196,7 +192,7 @@
                 </button>
               </div>
             </div>
-          </div>
+          </a>
           {% empty %}
           <div class="col-span-3 text-center py-12">
             <p class="text-2xl font-black text-gray-400">

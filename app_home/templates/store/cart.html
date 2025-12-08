@@ -5,194 +5,104 @@
     <!-- Título -->
     <div class="mb-8">
       <h1 class="text-5xl font-black mb-2">🛒 MI CARRITO</h1>
-      <p class="text-lg font-bold text-gray-600">3 productos en tu carrito</p>
+      <p class="text-lg font-bold text-gray-600">
+        {{ cart_items.count }} productos en tu carrito
+      </p>
     </div>
 
+    {% if cart_items %}
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
       <!-- ========================= PRODUCTOS EN EL CARRITO ========================= -->
       <div class="lg:col-span-2 space-y-4">
-        <!-- Item 1 -->
+        {% for cart_item in cart_items %}
+        <!-- Item -->
         <div class="comic-card bg-white p-6">
           <div class="flex gap-6">
             <!-- Imagen del producto -->
             <div
               class="w-32 h-32 bg-gradient-to-br from-red-400 to-yellow-500 border-3 border-black flex items-center justify-center flex-shrink-0"
             >
+              {% if cart_item.product.images %}
+              <img
+                src="{{ cart_item.product.images.url }}"
+                alt="{{ cart_item.product.product_name }}"
+                class="w-full h-full object-contain"
+              />
+              {% else %}
               <span class="text-6xl">🎨</span>
+              {% endif %}
             </div>
 
             <!-- Info del producto -->
             <div class="flex-1">
               <h3 class="text-2xl font-black mb-2">
-                Sticker Pikachu Holográfico
+                {{ cart_item.product.product_name }}
               </h3>
               <div class="space-y-1 mb-4">
-                <p class="text-sm font-bold text-gray-600">Tamaño: 8x8cm</p>
-                <p class="text-sm font-bold text-gray-600">Código: STK-001</p>
-              </div>
-
-              <!-- Cantidad y precio -->
-              <div class="flex items-center justify-between">
-                <!-- Selector de cantidad -->
-                <div class="flex items-center gap-2">
-                  <button
-                    class="quantity-input w-10 h-10 bg-white hover:bg-red-500 hover:text-white transition"
-                  >
-                    -
-                  </button>
-                  <input
-                    type="number"
-                    value="1"
-                    min="1"
-                    class="quantity-input w-16 h-10 bg-white"
-                  />
-                  <button
-                    class="quantity-input w-10 h-10 bg-white hover:bg-red-500 hover:text-white transition"
-                  >
-                    +
-                  </button>
-                </div>
-
-                <!-- Precio -->
-                <div class="text-right">
-                  <p class="text-3xl font-black text-red-500">$15.99</p>
-                  <p class="text-sm font-bold text-gray-500">$15.99 c/u</p>
-                </div>
-              </div>
-            </div>
-
-            <!-- Botón eliminar -->
-            <button
-              class="self-start bg-red-500 text-white px-4 py-2 font-black btn-comic hover:bg-red-600 text-sm"
-            >
-              ✕
-            </button>
-          </div>
-        </div>
-
-        <!-- Item 2 -->
-        <div class="comic-card bg-white p-6">
-          <div class="flex gap-6">
-            <!-- Imagen del producto -->
-            <div
-              class="w-32 h-32 bg-gradient-to-br from-blue-400 to-purple-500 border-3 border-black flex items-center justify-center flex-shrink-0"
-            >
-              <span class="text-6xl">🎨</span>
-            </div>
-
-            <!-- Info del producto -->
-            <div class="flex-1">
-              <h3 class="text-2xl font-black mb-2">Sticker Charmander</h3>
-              <div class="space-y-1 mb-4">
-                <p class="text-sm font-bold text-gray-600">Tamaño: 8x8cm</p>
-                <p class="text-sm font-bold text-gray-600">Código: STK-002</p>
-              </div>
-
-              <!-- Cantidad y precio -->
-              <div class="flex items-center justify-between">
-                <!-- Selector de cantidad -->
-                <div class="flex items-center gap-2">
-                  <button
-                    class="quantity-input w-10 h-10 bg-white hover:bg-red-500 hover:text-white transition"
-                  >
-                    -
-                  </button>
-                  <input
-                    type="number"
-                    value="2"
-                    min="1"
-                    class="quantity-input w-16 h-10 bg-white"
-                  />
-                  <button
-                    class="quantity-input w-10 h-10 bg-white hover:bg-red-500 hover:text-white transition"
-                  >
-                    +
-                  </button>
-                </div>
-
-                <!-- Precio -->
-                <div class="text-right">
-                  <p class="text-3xl font-black text-red-500">$29.98</p>
-                  <p class="text-sm font-bold text-gray-500">$14.99 c/u</p>
-                </div>
-              </div>
-            </div>
-
-            <!-- Botón eliminar -->
-            <button
-              class="self-start bg-red-500 text-white px-4 py-2 font-black btn-comic hover:bg-red-600 text-sm"
-            >
-              ✕
-            </button>
-          </div>
-        </div>
-
-        <!-- Item 3 -->
-        <div class="comic-card bg-white p-6">
-          <div class="flex gap-6">
-            <!-- Imagen del producto -->
-            <div
-              class="w-32 h-32 bg-gradient-to-br from-green-400 to-blue-500 border-3 border-black flex items-center justify-center flex-shrink-0"
-            >
-              <span class="text-6xl">🎨</span>
-            </div>
-
-            <!-- Info del producto -->
-            <div class="flex-1">
-              <h3 class="text-2xl font-black mb-2">Pack Pokémon x5</h3>
-              <div class="space-y-1 mb-4">
                 <p class="text-sm font-bold text-gray-600">
-                  5 stickers variados
+                  {{ cart_item.product.description|truncatewords:10 }}
                 </p>
-                <p class="text-sm font-bold text-gray-600">Código: STK-PACK</p>
+                <p class="text-sm font-bold text-gray-600">
+                  Código: {{ cart_item.product.product_code }}
+                </p>
               </div>
 
               <!-- Cantidad y precio -->
               <div class="flex items-center justify-between">
                 <!-- Selector de cantidad -->
                 <div class="flex items-center gap-2">
-                  <button
-                    class="quantity-input w-10 h-10 bg-white hover:bg-red-500 hover:text-white transition"
+                  <a
+                    href="#"
+                    class="quantity-input w-10 h-10 bg-white hover:bg-red-500 hover:text-white transition flex items-center justify-center"
                   >
                     -
-                  </button>
+                  </a>
                   <input
                     type="number"
-                    value="1"
+                    value="{{ cart_item.quantity }}"
                     min="1"
                     class="quantity-input w-16 h-10 bg-white"
+                    readonly
                   />
-                  <button
-                    class="quantity-input w-10 h-10 bg-white hover:bg-red-500 hover:text-white transition"
+                  <a
+                    href="{% url 'add_cart' cart_item.product.id %}"
+                    class="quantity-input w-10 h-10 bg-white hover:bg-red-500 hover:text-white transition flex items-center justify-center"
                   >
                     +
-                  </button>
+                  </a>
                 </div>
 
                 <!-- Precio -->
                 <div class="text-right">
-                  <p class="text-3xl font-black text-red-500">$49.99</p>
-                  <p class="text-sm font-bold text-gray-500">$49.99 c/u</p>
+                  <p class="text-3xl font-black text-red-500">
+                    ${{ cart_item.sub_total }}
+                  </p>
+                  <p class="text-sm font-bold text-gray-500">
+                    ${{ cart_item.product.price }} c/u
+                  </p>
                 </div>
               </div>
             </div>
 
             <!-- Botón eliminar -->
-            <button
+            <a
+              href="#"
               class="self-start bg-red-500 text-white px-4 py-2 font-black btn-comic hover:bg-red-600 text-sm"
             >
               ✕
-            </button>
+            </a>
           </div>
         </div>
+        {% endfor %}
 
         <!-- Botón vaciar carrito -->
         <div class="flex justify-end">
-          <button
+          <a
+            href="#"
             class="bg-white text-red-500 px-6 py-3 font-black btn-comic hover:bg-red-500 hover:text-white"
           >
             🗑️ VACIAR CARRITO
-          </button>
+          </a>
         </div>
       </div>
       <!-- ========================= FIN PRODUCTOS ========================= -->
@@ -208,22 +118,18 @@
           <div class="space-y-4 mb-6">
             <div class="flex justify-between items-center font-bold text-lg">
               <span>Subtotal:</span>
-              <span class="text-gray-700">$95.96</span>
+              <span class="text-gray-700">${{ total }}</span>
             </div>
             <div class="flex justify-between items-center font-bold text-lg">
               <span>Envío:</span>
               <span class="text-green-600">GRATIS</span>
-            </div>
-            <div class="flex justify-between items-center font-bold text-lg">
-              <span>Impuestos:</span>
-              <span class="text-gray-700">$10.00</span>
             </div>
 
             <hr class="border-2 border-black" />
 
             <div class="flex justify-between items-center">
               <span class="text-2xl font-black">TOTAL:</span>
-              <span class="text-4xl font-black text-red-500">$105.96</span>
+              <span class="text-4xl font-black text-red-500">${{ total }}</span>
             </div>
           </div>
 
@@ -239,16 +145,18 @@
 
           <!-- Botones de acción -->
           <div class="space-y-3">
-            <button
-              class="w-full bg-red-500 text-white px-6 py-4 font-black text-lg btn-comic hover:bg-red-600"
+            <a
+              href="#"
+              class="w-full bg-red-500 text-white px-6 py-4 font-black text-lg btn-comic hover:bg-red-600 block text-center"
             >
               PROCEDER AL PAGO
-            </button>
-            <button
-              class="w-full bg-white text-black px-6 py-3 font-black btn-comic hover:bg-yellow-400"
+            </a>
+            <a
+              href="{% url 'store' %}"
+              class="w-full bg-white text-black px-6 py-3 font-black btn-comic hover:bg-yellow-400 block text-center"
             >
               SEGUIR COMPRANDO
-            </button>
+            </a>
           </div>
 
           <!-- Info adicional -->
@@ -270,18 +178,22 @@
       </aside>
       <!-- ========================= FIN RESUMEN ========================= -->
     </div>
-
-    <!-- Mensaje carrito vacío (ocultar si hay items) -->
-    <!-- 
-        <div class="comic-card bg-white p-12 text-center" style="display: none;">
-            <span class="text-9xl mb-4 block">🛒</span>
-            <h2 class="text-4xl font-black mb-4">TU CARRITO ESTÁ VACÍO</h2>
-            <p class="text-xl font-bold text-gray-600 mb-8">¡Agrega productos increíbles!</p>
-            <button class="bg-red-500 text-white px-8 py-4 font-black text-lg btn-comic hover:bg-red-600">
-                IR A LA TIENDA
-            </button>
-        </div>
-        -->
+    {% else %}
+    <!-- Mensaje carrito vacío -->
+    <div class="comic-card bg-white p-12 text-center">
+      <span class="text-9xl mb-4 block">🛒</span>
+      <h2 class="text-4xl font-black mb-4">TU CARRITO ESTÁ VACÍO</h2>
+      <p class="text-xl font-bold text-gray-600 mb-8">
+        ¡Agrega productos increíbles!
+      </p>
+      <a
+        href="{% url 'store' %}"
+        class="bg-red-500 text-white px-8 py-4 font-black text-lg btn-comic hover:bg-red-600 inline-block"
+      >
+        IR A LA TIENDA
+      </a>
+    </div>
+    {% endif %}
   </div>
 </section>
 

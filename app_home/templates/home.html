@@ -37,7 +37,7 @@
     <div class="max-w-7xl mx-auto px-6">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-6 justify-center">
             {% for category in links %}
-            <a href="{% url 'store' %}" class="comic-card {% cycle 'bg-red-500' 'bg-blue-500' 'bg-yellow-400' 'bg-green-500' %} p-6 text-center cursor-pointer block hover:opacity-90 transition">
+            <a href="{% url 'store' %}" class="comic-card {% cycle 'from-blue-400 to-purple-500' 'from-green-400 to-emerald-500' 'from-yellow-400 to-orange-500' 'from-indigo-400 to-blue-500' %} p-6 text-center cursor-pointer block hover:opacity-90 transition">
                 <div class="mb-3 flex justify-center">
                 {% if category.cat_image %}
                 <img
