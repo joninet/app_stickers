@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Product
+from .models import Product, Variation
 from category.models import Category
 
 
@@ -13,4 +13,10 @@ class ProductAdmin(admin.ModelAdmin):
         return obj.subcategory.category  # accede a la categoría
     get_category.short_description = 'Categoría'  # nombre en el admin
     
+class VariationAdmin(admin.ModelAdmin):
+    list_display = ('product', 'variation_category', 'variation_value', 'is_active')
+    list_editable = ('is_active',)
+    list_filter = ('product', 'variation_category', 'variation_value', 'is_active')
+    
 admin.site.register(Product, ProductAdmin)
+admin.site.register(Variation, VariationAdmin)

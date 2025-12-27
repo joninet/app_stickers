@@ -185,11 +185,22 @@
                 <span class="text-3xl font-black text-red-500"
                   >$ {{ product.price }}</span
                 >
+                {% if product.stock <= 0 %}
                 <button
-                  class="bg-black text-yellow-400 px-4 py-2 font-bold btn-comic text-sm add-to-cart"
+                  class="bg-red text-black-400 px-4 py-2 font-bold btn-comic text-sm add-to-cart"
                 >
-                  AGREGAR
+                  Sin Stock
                 </button>
+                {% else %}
+                <form action="{% url 'add_cart' product.id %}" method="POST">
+                  {% csrf_token %}
+                  <button
+                    class="bg-black text-yellow-400 px-4 py-2 font-bold btn-comic text-sm add-to-cart"
+                  >
+                    AGREGAR
+                  </button>
+                </form>
+                {%endif%}
               </div>
             </div>
           </a>
@@ -204,31 +215,26 @@
         <!-- FIN Grid de productos -->
 
         <!-- Paginación -->
-        <div class="flex justify-center items-center gap-2">
-          <button
-            class="bg-white text-black px-4 py-2 font-black btn-comic hover:bg-gray-200"
-          >
-            Anterior
-          </button>
-          <button class="bg-red-500 text-white px-4 py-2 font-black btn-comic">
-            1
-          </button>
-          <button
-            class="bg-white text-black px-4 py-2 font-black btn-comic hover:bg-red-500 hover:text-white"
-          >
-            2
-          </button>
-          <button
-            class="bg-white text-black px-4 py-2 font-black btn-comic hover:bg-red-500 hover:text-white"
-          >
-            3
-          </button>
-          <button
-            class="bg-white text-black px-4 py-2 font-black btn-comic hover:bg-gray-200"
-          >
-            Siguiente
-          </button>
-        </div>
+        {% if products.has_other_pages %}
+          <div class="flex justify-center items-center gap-2">
+            {% if products.has_previous %}
+            <a href="?page={{ products.previous_page_number }}" class="bg-white text-black px-4 py-2 font-black btn-comic hover:bg-gray-200">Anterior</a>
+            {% endif %}
+            
+            {% for i in products.paginator.page_range %}
+            {% if products.number == i %}
+            <span class="bg-red-500 text-white px-4 py-2 font-black btn-comic">{{ i }}</span>
+            {% endif %}
+            {% if products.number != i %}
+            <a href="?page={{ i }}" class="bg-white text-black px-4 py-2 font-black btn-comic hover:bg-red-500 hover:text-white">{{ i }}</a>
+            {% endif %}
+            {% endfor %}
+            
+            {% if products.has_next %}
+            <a href="?page={{ products.next_page_number }}" class="bg-white text-black px-4 py-2 font-black btn-comic hover:bg-gray-200">Siguiente</a>
+            {% endif %}
+          </div>
+        {% endif %}
       </div>
       <!-- ========================= FIN GRID PRODUCTOS ========================= -->
     </div>

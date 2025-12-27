@@ -1,78 +1,99 @@
 {% load static %}
 <header class="section-header">
-  <!-- TOP BAR -->
   <nav class="bg-white comic-border relative z-50">
-    <div class="max-w-7xl mx-auto px-6 py-4">
-      <div class="flex justify-between items-center">
-        <!-- Logo -->
-        <a
-          href="{% url 'home' %}"
+    
+    <!-- Primera fila: Logo, Búsqueda y Carrito -->
+    <div class="px-6">
+      <div class="grid grid-cols-3 gap-8 items-center py-4">
+        
+        <!-- Logo (columna izquierda) -->
+        
+          <a href="{% url 'home' %}"
           class="flex items-center gap-4 hover:opacity-90 transition"
         >
           <img
             src="{% static 'images/logo2.png' %}"
             alt="Logo"
-            class="w-24 h-24 object-contain"
+            class="w-20 h-20 object-contain"
           />
           <div>
-            <h1 class="text-3xl font-black tracking-tighter">PICHISTICKERS</h1>
+            <h1 class="text-2xl font-black tracking-tighter">PICHISTICKERS</h1>
             <p class="text-xs text-gray-600 font-semibold">¡PEGÁ LA ONDA!</p>
           </div>
         </a>
+        <!-- Barra de búsqueda (columna centro) -->
+        <form action="{% url 'search' %}" method="GET" class="hidden lg:flex">
+          <div class="relative w-full">
+            <input
+              type="text"
+              name="keyword"
+              placeholder="Buscar stickers..."
+              class="w-full border border-gray-600 px-4 py-3 pr-14 font-bold focus:outline-none focus:border-red-500"
+            />
+            <button type="submit" class="absolute right-2 top-1/2 -translate-y-1/2 bg-red-500 text-white p-2 font-black hover:bg-red-600 transition">
+              <svg class="w-5 h-5 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+              </svg>
+            </button>
+          </div>
+        </form>
 
-        <!-- Menú de navegación -->
-        <div class="hidden md:flex gap-6 items-center">
-          <a
-            href="#"
-            class="font-bold text-gray-800 hover:text-red-500 transition"
-            >INICIO</a
-          >
-          <a
-            href="#productos"
-            class="font-bold text-gray-800 hover:text-red-500 transition"
-            >PRODUCTOS</a
-          >
-          <a
-            href="#custom"
-            class="font-bold text-gray-800 hover:text-red-500 transition"
-            >CUSTOM</a
-          >
-          <a
-            href="#contacto"
-            class="font-bold text-gray-800 hover:text-red-500 transition"
-            >CONTACTO</a
-          >
-
-          <!-- Carrito -->
-          <button
-            class="bg-black text-yellow-400 px-6 py-2 font-black btn-comic relative"
-          >
-            CARRITO
-            <span
-              id="cart-count"
-              class="absolute -top-2 -right-2 bg-red-500 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs"
-              >0</span
+        <!-- Carrito (columna derecha) -->
+        <div class="hidden lg:flex justify-end">
+          <form action="{% url 'cart' %}" method="POST">
+            {% csrf_token %}
+            <button
+              class="bg-black text-yellow-400 p-3 font-black btn-comic relative hover:bg-gray-800 transition"
             >
-          </button>
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+              </svg>
+              <span
+                id="cart-count"
+                class="absolute -top-2 -right-2 bg-red-500 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs font-black"
+                >{{ cart_count }}</span
+              >
+            </button>
+          </form>
         </div>
 
         <!-- Botón menú móvil -->
-        <button class="md:hidden bg-black text-white p-2 btn-comic">
-          <svg
-            class="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M4 6h16M4 12h16M4 18h16"
-            ></path>
+        <button class="lg:hidden bg-black text-white p-2 btn-comic col-start-3 justify-self-end">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
           </svg>
         </button>
       </div>
     </div>
+
+    <!-- Segunda fila: Menú de navegación (ANCHO COMPLETO) -->
+    <div class="hidden lg:flex justify-center gap-8 py-3 border-t-3 border-black bg-gradient-to-r from-red-500 via-yellow-400 to-red-500">
+      <a href="#" class="font-bold text-white hover:text-black transition">INICIO</a>
+      <a href="#productos" class="font-bold text-white hover:text-black transition">PRODUCTOS</a>
+      <a href="#custom" class="font-bold text-white hover:text-black transition">CUSTOM</a>
+      <a href="#contacto" class="font-bold text-white hover:text-black transition">CONTACTO</a>
+    </div>
+
+    <!-- Búsqueda móvil -->
+    <div class="px-6">
+      <form action="{% url 'search' %}" method="GET" class="lg:hidden pb-4 search">
+        <div class="relative w-full">
+          <input
+            type="text"
+            name="search"
+            placeholder="Buscar stickers..."
+            class="w-full border border-gray-600 px-4 py-3 pr-14 font-bold focus:outline-none focus:border-red-500"
+            name="keyword"
+          />
+          <button
+            type="submit"
+            class="absolute right-2 top-1/2 -translate-y-1/2 bg-red-500 text-white px-3 py-2 font-black hover:bg-red-600 transition"
+          >
+            🔍
+          </button>
+        </div>
+      </form>
+    </div>
+
   </nav>
 </header>
